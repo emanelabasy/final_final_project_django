@@ -65,10 +65,15 @@
                     <li>
                         <a href="http://127.0.0.1:8000/user_action/addBlog/">blog</a>
                     </li>
+                    {% if user.is_superuser == 1 or user.is_staff == 1 %}
+                    <li>
+                        <a href="http://127.0.0.1:8000/admin/">Admin Panel</a>
+                    </li>
+
+                    {% endif %}
+
                     {{request.session.user_id}}
                         {% if "user_id" in request.session %}
-
-
                     <li>
                         <a href="http://127.0.0.1:8000/articles/logout">log out</a>
                     </li>
@@ -105,6 +110,7 @@
 
 {% if latest_article_list %}
      {% for article in latest_article_list %}
+        {% if article.art_status == 'p' %}
               <div class="post-preview">
 
                <div class="chk col-lg-offset-2" style="margin-bottom:-65px;margin-left: 635px;">
@@ -134,12 +140,18 @@
                 <p class="post-meta"><img src="/media/{{ article.art_img }}" width="600px" height="200px" alt=""></p>
                 <p class="post-meta">{{ article.art_content}} <a href="/user_action/{{ article.id }}/">..... more</a></p>
 
+                {% if article.art_user_id_id == request.session.user_id %}
                 <a href="http://127.0.0.1:8000/user_action/success/?action=delete&id={{ article.id }}">Delete</a> &nbsp;&nbsp;&nbsp;
                 <a href="http://127.0.0.1:8000/user_action/addBlog/?id={{ article.id }}">Edit</a>
                 </a>
+                {% endif %}
+
+
                 </div>
             <hr>
+                {% endif %}
               {% endfor %}
+                
             {% else %}
         <p>No article are available.</p>
         {% endif %}

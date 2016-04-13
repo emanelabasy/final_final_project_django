@@ -92,7 +92,7 @@ class User_profile (models.Model):
 
 class Article(models.Model):
 	art_title=models.CharField('title',max_length=255)
-	tag_name = models.CharField(max_length=30,default=" ")
+	# tag_name = models.CharField(max_length=30,default=" ")
 	art_content=models.TextField()
 	art_img=models.ImageField(upload_to='static/img/')
 	art_status=models.CharField('publish status',max_length=1,choices=STATUS_CHOICES,default='d')
@@ -139,7 +139,7 @@ class Comment(models.Model):
 	Comment_content=models.TextField()
 	Comment_status=models.BooleanField('Is Approved',default=1)
 	Comment_parent_id=models.IntegerField(default=-1)
-	user_comment_like=models.ManyToManyField(User)
+	Comment_user_like=models.ManyToManyField(User)
 	Comment_art_id=models.ForeignKey(Article,on_delete=models.CASCADE)
 	def __str__(self):
 		 return self.Comment_content

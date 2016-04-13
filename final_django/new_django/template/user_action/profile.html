@@ -64,6 +64,12 @@
                     <li>
                         <a href="http://127.0.0.1:8000/user_action/addBlog/">blog</a>
                     </li>
+                     {% if user.is_superuser == 1 or user.is_staff == 1 %}
+                    <li>
+                        <a href="http://127.0.0.1:8000/admin/">Admin Panel</a>
+                    </li>
+
+                    {% endif %}
                     <li>
                         <a href="http://127.0.0.1:8000/articles/logout">Sign out</a>
                     </li>

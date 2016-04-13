@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 
 import os
-from django.utils.module_loading import import_module
+# from django.utils.module_loading import import_module
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'articles',
     # 'captcha',
     'user_action',
-    'registration',      #eman elabasy
+    # 'registration',      #eman elabasy
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -161,9 +161,9 @@ TEMPLATE_CONTEXT_PROCESSORS = [
 AUTHENTICATION_BACKENDS = (
    
     # Needed to login by username in Django admin, regardless of `allauth`
-    'django.contrib.auth.backends.ModelBackend',
+    # 'django.contrib.auth.backends.ModelBackend',
 
-    # `allauth` specific authentication methods, such as login by e-mail
+    # # `allauth` specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
 
     # 'social.backends.facebook.FacebookOAuth2',  #---> there problem
@@ -172,8 +172,8 @@ AUTHENTICATION_BACKENDS = (
 
 #from api of facebook and install this command in terminal (pip install django-allauth) 
 #and this make login and register in the frist time (email ,password, username, access token)
-SOCIAL_AUTH_FACEBOOK_KEY='1044746605570988'
-SOCIAL_AUTH_FACEBOOK_SECRET='c23a08189556b86896eab50b838f7e76'
+# SOCIAL_AUTH_FACEBOOK_KEY='1044746605570988'
+# SOCIAL_AUTH_FACEBOOK_SECRET='c23a08189556b86896eab50b838f7e76'
 
 SOCIALACCOUNT_PROVIDERS = {
  'facebook': {

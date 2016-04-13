@@ -1,0 +1,24 @@
+Kindly consider the following modification ....
+
+
+1- models in comment class we renamed (user_comment_like -> Comment_user_like)
+2- models in article class we removed (tag_name field)
+
+*-------------------------------------------------------------------------------
+
+3- we modified the (logout def) in article's view  ->  change the position(line) of del request.session['user_id']
+
+*-------------------------------------------------------------------------------
+
+added features :
+
+4- lock system 
+5- check admin and staff
+6- check approvement of article 
+7- 7agat fe el admin.py dfnaha malkosh d3wa beha :D
+*-------------------------------------------------------------------------------
+
+Dear eman el abbasy,
+                   please, start session after user registration.
+my regard 
+sherif elkhiat 

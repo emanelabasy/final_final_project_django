@@ -12,6 +12,7 @@ urlpatterns = [
     url(r'^design/$',views.design,name='design'),
     url(r'^mark/$', views.mark, name='mark'),
     url(r'^home/$', views.home, name='home'),
+    url(r'^system_locked/$', views.system_locked, name='system_locked'),
     url(r'^profile/(?P<user_id>[0-9]+)$', views.profile, name='profile'),
     # url(r'^addComment/$', views.addComment, name='addComment'),
     # ex: /polls/5/

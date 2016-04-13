@@ -19,7 +19,12 @@ def randomConfirm(length=3):
 
 # ******************************** register ************************************
 def register(request):
-    return render(request,'articles/register.html')
+    lock = lockSystem.objects.get(pk=1)
+    if lock.is_locked == True:
+        return redirect("http://127.0.0.1:8000/user_action/system_locked") 
+    else:
+        return render(request,'articles/register.html')
+
 def registerform(request):
     return render(request,'articles/registration_form.html')
 
@@ -228,11 +233,14 @@ def index(request):
 
 def login(request):
     # return HttpResponse("Hello, world. You're at the article index.")
-    return render(request,'articles/login.html')
+    lock = lockSystem.objects.get(pk=1)
+    if lock.is_locked == True:
+        return redirect("http://127.0.0.1:8000/user_action/system_locked") 
+    else:
+        return render(request,'articles/login.html')
 
     
 def email_login(request):
-
     return render(request,'articles/email_login.html')
 
 
@@ -277,20 +285,21 @@ def view_selected_article(request,art_id):
 
 
 #--------------------------------------------------------
-def is_locked(request):
-    lock = lockSystem.objects.get(pk=1)
-    if lock.is_locked == True:
-        return render(request,"system_locked.html") 
-    else:
-        return render(request,"test.html")
+# def is_locked(request):
+#     lock = lockSystem.objects.get(pk=1)
+#     if lock.is_locked == True:
+#         return render(request,"system_locked.html") 
+#     else:
+#         return render(request,"test.html")
 
 # ******************************** logout     ************************************        
 def logout(request):
     # del request.session["user_id"]
     # return render(request,'articles/login.html')
+    del request.session['user_id']
     if request.session.test_cookie_worked():
         request.session.delete_test_cookie()
-        del request.session['user_id']
+       
     # else:
         # del request.session['user_id']
     return render(request,'articles/login.html')

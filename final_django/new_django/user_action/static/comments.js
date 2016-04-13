@@ -47,9 +47,8 @@ $(function(){
     	var comment_id = $(this).next("span").text();
     	// user id
     	var user_id = $(this).next("span").next("span").text();
-
     	$.ajax({
-		url: 'http://127.0.0.1:8006/user_action/like/?like=yes&comment_id='+comment_id+'&user_id='+user_id+'',
+		url: 'http://127.0.0.1:8000/user_action/like/?like=yes&comment_id='+comment_id+'&user_id='+user_id+'',
 		type: 'get',
 		dataType: 'json'
 		})
@@ -71,7 +70,7 @@ $(function(){
     	var user_id = $(this).next("span").next("span").text();
 
     	$.ajax({
-		url: 'http://127.0.0.1:8006/user_action/like/?comment_id='+comment_id+'&user_id='+user_id+'',
+		url: 'http://127.0.0.1:8000/user_action/like/?comment_id='+comment_id+'&user_id='+user_id+'',
 		type: 'get',
 		dataType: 'json'
 		})
@@ -88,11 +87,11 @@ $(function(){
      $('body').on('click','input[type="checkbox"]',function(event){
         var article_id = $(this).val();
         var user_id = $(this).next('span').text()
-        alert(article_id);
+        // alert(article_id);
      	if($(this).is(':checked'))
      	{
      		$.ajax({
-			url: 'http://127.0.0.1:8006/user_action/mark/?mark=yes&article_id='+article_id+'&user_id='+user_id+'',
+			url: 'http://127.0.0.1:8000/user_action/mark/?mark=yes&article_id='+article_id+'&user_id='+user_id+'',
 			type: 'get',
 			dataType: 'json'
 			})
@@ -106,7 +105,7 @@ $(function(){
      	else
      	{
      		$.ajax({
-			url: 'http://127.0.0.1:8006/user_action/mark/?article_id='+article_id+'&user_id='+user_id+'',
+			url: 'http://127.0.0.1:8000/user_action/mark/?article_id='+article_id+'&user_id='+user_id+'',
 			type: 'get',
 			dataType: 'json'
 			})
