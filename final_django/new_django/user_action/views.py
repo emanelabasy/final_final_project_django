@@ -7,6 +7,7 @@ from .forms import PostForm , CommentForm , ReplyForm
 
 
 def profile(request,user_id):
+    # user = User.objects.get(pk=request.session['user_id'])
     user = User.objects.get(pk=user_id)
     show_img=User_profile.objects.get(pk=user_id)
     image=str(show_img.user_img)[2:]
@@ -102,6 +103,7 @@ def like(request):
 
 def details(request, article_id):
     try:
+        user = User.objects.get(pk=request.session['user_id'])
         form1 = ReplyForm()
         article = Article.objects.get(pk=article_id)
         if article.art_status == 'p':
@@ -121,7 +123,6 @@ def details(request, article_id):
                 if form.is_valid():
                     comment = Comment()
                     banned_words = Banwords.objects.all()
-                    # return HttpResponse(banned_words)
                     filtered_comment = form.cleaned_data['comment']
                     for banned in banned_words:
                         filtered_comment=filtered_comment.replace(banned.banword_name,"***")
@@ -136,15 +137,20 @@ def details(request, article_id):
                 if form1.is_valid():
                     # return HttpResponse('da5al')
                     reply = Comment()
+                    banned_reply = Banwords.objects.all()
                     reply.Comment_content = form1.cleaned_data['reply']
+                    for banned in banned_reply:
+                        reply.Comment_content=reply.Comment_content.replace(banned.banword_name,"***")
+                    
                     reply.Comment_art_id_id = article_id
                     reply.Comment_parent_id = form1.cleaned_data['parentcomment']
+
                     reply.save()
 
             comments = article.comment_set.all()
             	# comment.comment_set.all()       
             	# get_object_or_404(Comment,Comment_parent_id=comment.id)
-            context = {"article":article,"comments":comments,"form":form1,"artimage":artimage,"related_articles":related_articles}
+            context = {"article":article,"comments":comments,"form":form1,"artimage":artimage,"related_articles":related_articles,"user":user}
             return render(request,'user_action/details.html',context)
         else:
             return redirect("http://127.0.0.1:8000/user_action/")

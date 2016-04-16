@@ -65,6 +65,7 @@
                     <li>
                         <a href="http://127.0.0.1:8000/user_action/addBlog/">blog</a>
                     </li>
+                    <!-- {{ user.username }} -->
                     {% if user.is_superuser == 1 or user.is_staff == 1 %}
                     <li>
                         <a href="http://127.0.0.1:8000/admin/">Admin Panel</a>
@@ -72,7 +73,7 @@
 
                     {% endif %}
 
-                    {{request.session.user_id}}
+                    <!-- {{request.session.user_id}} -->
                         {% if "user_id" in request.session %}
                     <li>
                         <a href="http://127.0.0.1:8000/articles/logout">log out</a>

@@ -45,30 +45,35 @@
                 </button>
                 <a class="navbar-brand" href="index.html"><img src="{% static "img/logo.png" %}"/></a>
             </div>
-
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                   <li>
+                    <li>
                         <a href="http://127.0.0.1:8000/user_action/">Wall</a>
                     </li>
-                     {% if "user_id" in request.session %}
+                        {% if "user_id" in request.session %}
                     <li>
                         <a href="http://127.0.0.1:8000/user_action/profile/{{ request.session.user_id}}">Profile</a>
                     </li>
-                    
-                     {% if user.is_superuser == 1 or user.is_staff == 1 %}
+                    {% endif %}
+                    <li>
+                        <a href="http://127.0.0.1:8000/user_action/addBlog/">blog</a>
+                    </li>
+                    {% if user.is_superuser == 1 or user.is_staff == 1 %}
                     <li>
                         <a href="http://127.0.0.1:8000/admin/">Admin Panel</a>
                     </li>
 
                     {% endif %}
 
-                     <li>
-                        <a href="http://127.0.0.1:8000/articles/logout">Sign out</a>
-                    </li>
-                    {% else %}
+                    <!-- {{request.session.user_id}} -->
+                        {% if "user_id" in request.session %}
                     <li>
+                        <a href="http://127.0.0.1:8000/articles/logout">log out</a>
+                    </li>
+
+                        {% else %}
+                   <li>
                         <a href="http://127.0.0.1:8000/articles/login">Login</a>
                     </li>
                     {% endif %}
@@ -84,9 +89,9 @@
             <div class="row">
                 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                     <div class="site-heading">
-                        <h1>Clean Blog</h1>
+                        <h1>Articles Blog</h1>
                         <hr class="small">
-                        <span class="subheading">A Clean Blog Theme by Start Bootstrap</span>
+                        <span class="subheading">Articles Blog  by EEE OS</span>
                     </div>
                 </div>
             </div>

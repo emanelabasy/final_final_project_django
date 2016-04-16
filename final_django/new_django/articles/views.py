@@ -283,7 +283,6 @@ def view_selected_article(request,art_id):
     }
     return render(request,"test.html", dictionary)
 
-
 #--------------------------------------------------------
 # def is_locked(request):
 #     lock = lockSystem.objects.get(pk=1)
@@ -296,11 +295,11 @@ def view_selected_article(request,art_id):
 def logout(request):
     # del request.session["user_id"]
     # return render(request,'articles/login.html')
-    del request.session['user_id']
+    # del request.session['user_id']
     if request.session.test_cookie_worked():
         request.session.delete_test_cookie()
        
-    # else:
-        # del request.session['user_id']
+    if "user_id" in request.session:
+        del request.session['user_id']
     return render(request,'articles/login.html')
 # ******************************** END ??? ***********************************        

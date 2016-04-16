@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     
-    <title>blogs</title>
+    <title>Profile</title>
     {% load staticfiles %}
     <!-- Bootstrap Core CSS -->
     <!-- {% static "jquery-1.12.0.min.js" %} -->
@@ -58,21 +58,33 @@
                     <li>
                         <a href="http://127.0.0.1:8000/user_action/">Wall</a>
                     </li>
+                        {% if "user_id" in request.session %}
                     <li>
                         <a href="http://127.0.0.1:8000/user_action/profile/{{ request.session.user_id}}">Profile</a>
                     </li>
+                    {% endif %}
                     <li>
                         <a href="http://127.0.0.1:8000/user_action/addBlog/">blog</a>
                     </li>
-                     {% if user.is_superuser == 1 or user.is_staff == 1 %}
+
+                    <!-- {{ context.user.username }} -->
+                    {% if context.user.is_superuser == 1 or context.user.is_staff == 1 %}
+                        <li>
+                            <a href="http://127.0.0.1:8000/admin/">Admin Panel</a>
+                        </li>
+                    {% endif %}
+                    <!-- {{request.session.user_id }} -->
+                    {% if "user_id" in request.session %}
+                        
                     <li>
-                        <a href="http://127.0.0.1:8000/admin/">Admin Panel</a>
+                        <a href="http://127.0.0.1:8000/articles/logout">log out</a>
                     </li>
 
-                    {% endif %}
-                    <li>
-                        <a href="http://127.0.0.1:8000/articles/logout">Sign out</a>
+                        {% else %}
+                   <li>
+                        <a href="http://127.0.0.1:8000/articles/login">Login</a>
                     </li>
+                    {% endif %}
                 </ul>
             </div>
             <!-- /.navbar-collapse -->
