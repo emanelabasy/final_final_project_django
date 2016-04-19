@@ -62,7 +62,7 @@
                     <li>
                         <a href="http://127.0.0.1:8000/user_action/addBlog/">blog</a>
                     </li>
-                    {{ user.username }}
+                    
                     {% if user.is_superuser == 1 or user.is_staff == 1 %}
                     <li>
                         <a href="http://127.0.0.1:8000/admin/">Admin Panel</a>
@@ -128,7 +128,7 @@
 			  {% if related_articles %}
 			    {% for related in related_articles %}
 			       {% if related.id != article.id %}
-			       		<a href="#" class="list-group-item">{{related.art_title}}</a>
+			       		<a href="/user_action/{{ related.id }}" class="list-group-item">{{related.art_title}}</a>
 			       {% endif %}
 			    {% endfor %}
 			  {% endif %}
@@ -156,11 +156,11 @@
 
     {% if comments %}
 	 {% for comment in comments %}
+      {% if comment.Comment_status == 1 %}
 	   <p class="comments">
 		 {% if comment.Comment_parent_id == -1 %}
-			 {{ comment.Comment_content }}	<br/>
-
-<!-- http://127.0.0.1:8006/user_action/like/?comment_id={{comment.id}}&user_id=1 -->
+			 <br/>
+             {{ comment.Comment_content }}	
 				{% if comment.Comment_user_like.all %}
 					<a class="btn btn-primary" href="#">dislike</a>
 					<span style="display:none;"> {{ comment.id }}</span>
@@ -178,10 +178,8 @@
 					<p class="col-lg-offset-1">{{ reply.Comment_content }}</p>
 				  {% endif %}
 			    {% endfor %} 
-			  {% endif %}
-
+		 {% endif %}
 			  </p> 
-	    
 	    
 
 	    <form action="http://127.0.0.1:8000/user_action/{{ article.id }}/" method="post" accept-charset="utf-8" class="col-lg-offset-2">
@@ -194,25 +192,9 @@
 	     {% csrf_token %}
 	     </table>
 	    </form>
+        {% endif %}
 	 {% endfor %}
 	{% endif %}
-
-
-{% if form.errors %}
-    {% for field in form %}
-        {% for error in field.errors %}
-            <div class="alert alert-error">
-                <strong>sss{{ error|escape }}</strong>
-            </div>
-        {% endfor %}
-    {% endfor %}
-    {% for error in form.non_field_errors %}
-        <div class="alert alert-error">
-            <strong>{{ error|escape }}</strong>
-        </div>
-    {% endfor %}
-{% endif %}
-
 
 
 	<form action="http://127.0.0.1:8000/user_action/{{ article.id }}/" method="post" accept-charset="utf-8"> 

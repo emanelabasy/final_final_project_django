@@ -1,6 +1,4 @@
-$(function(){												
-
-
+$(function(){
     $('p').emoticonize();
 
 	$('body').on('click','input[value="reply"]',function(event){
@@ -13,7 +11,7 @@ $(function(){
     	{
     		$(this).focus();
     		$(this).css('border-color', 'red');
-    	} 
+    	}
     });
 
     $('textarea[name="content"]').on('blur',function(event){

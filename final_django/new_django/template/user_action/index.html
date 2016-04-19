@@ -50,7 +50,7 @@
                 </button>
 <a class="navbar-brand" href="#"><img src="{% static "img/logo.png" %}"/></a>
             </div>
-
+            {{ request.session.user_id }}
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
@@ -115,7 +115,7 @@
               <div class="post-preview">
 
                <div class="chk col-lg-offset-2" style="margin-bottom:-65px;margin-left: 635px;">
-                <input type="checkbox" style="display:inline;" class="checkbox" value="{{ article.id }}"><span style="display:none;">1</span>read later    
+                <input type="checkbox" style="display:inline;" class="checkbox" value="{{ article.id }}"><span style="display:none;">{{request.session.user_id}}</span>read later    
                  </div>
               {% if marked_articles %}
                 {% for marked in  marked_articles %}                 

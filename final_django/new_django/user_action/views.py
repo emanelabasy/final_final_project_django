@@ -23,8 +23,12 @@ def profile(request,user_id):
     }
     return render(request,'user_action/profile.html',{'context':context})
 
+
+
 def system_locked(request):
     return render(request,'user_action/system_locked.html')
+
+
 
 
 def home(request):
@@ -43,11 +47,15 @@ def home(request):
         }
         return render(request, 'user_action/home.html', context)
 
+
 def index(request):
-    user = User.objects.get(pk=request.session['user_id'])
+    user  = User.objects.get(pk=request.session['user_id'])
+    # marks = Mark.objects.filter(request.session['user_id'])
+    # return HttpResponse()
     if "user_id" in request.session:
         latest_article_list = Article.objects.order_by('art_publish_date')[:10]
-        marked_articles = Mark.objects.filter(user_id=1)
+        # return HttpResponse(request.session['user_id'])
+        marked_articles = Mark.objects.filter(user_id=request.session['user_id'])
         context = {
             'latest_article_list': latest_article_list,
             'marked_articles':marked_articles,
@@ -82,9 +90,7 @@ def like(request):
     if request.GET.get('like') == 'yes':
         if request.GET.get('comment_id') and request.GET.get('user_id'):
     	    # comment=Comment()
-            
             comment = Comment.objects.get(pk=request.GET.get('comment_id'))
-
             # user = Obj_user.objects.get(pk=request.GET.get('user_id'))
             # comment.user_set.add(user)
             comment.Comment_user_like.add(User.objects.get(pk=request.GET.get('user_id')))
@@ -92,7 +98,6 @@ def like(request):
     else:
         if request.GET.get('comment_id') and request.GET.get('user_id'):
            # comment=Comment()
-
            comment = Comment.objects.get(pk=request.GET.get('comment_id'))
            # user = Obj_user.objects.get(pk=request.GET.get('user_id'))
            # comment.user_set.add(user)
@@ -148,6 +153,7 @@ def details(request, article_id):
                     reply.save()
 
             comments = article.comment_set.all()
+            # return HttpResponse(comments)
             	# comment.comment_set.all()       
             	# get_object_or_404(Comment,Comment_parent_id=comment.id)
             context = {"article":article,"comments":comments,"form":form1,"artimage":artimage,"related_articles":related_articles,"user":user}
