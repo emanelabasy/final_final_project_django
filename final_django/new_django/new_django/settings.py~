@@ -184,7 +184,7 @@ SOCIALACCOUNT_PROVIDERS = {
 }
 
 SITE_ID = 3
-LOGIN_REDIRECT_URL="/articles/face_register"
+LOGIN_REDIRECT_URL="/articles/face_regist"
 
 #-------------------------------------------------------------------------
 

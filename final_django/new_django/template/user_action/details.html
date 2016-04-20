@@ -52,20 +52,20 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="http://127.0.0.1:8000/user_action/">Wall</a>
+                        <a href="http://localhost:8000/user_action/">Wall</a>
                     </li>
                         {% if "user_id" in request.session %}
                     <li>
-                        <a href="http://127.0.0.1:8000/user_action/profile/{{ request.session.user_id}}">Profile</a>
+                        <a href="http://localhost:8000/user_action/profile/{{ request.session.user_id}}">Profile</a>
                     </li>
                     {% endif %}
                     <li>
-                        <a href="http://127.0.0.1:8000/user_action/addBlog/">blog</a>
+                        <a href="http://localhost:8000/user_action/addBlog/">blog</a>
                     </li>
                     
                     {% if user.is_superuser == 1 or user.is_staff == 1 %}
                     <li>
-                        <a href="http://127.0.0.1:8000/admin/">Admin Panel</a>
+                        <a href="http://localhost:8000/admin/">Admin Panel</a>
                     </li>
 
                     {% endif %}
@@ -73,12 +73,12 @@
                     <!-- {{request.session.user_id}} -->
                         {% if "user_id" in request.session %}
                     <li>
-                        <a href="http://127.0.0.1:8000/articles/logout">log out</a>
+                        <a href="http://localhost:8000/articles/logout">log out</a>
                     </li>
 
                         {% else %}
                    <li>
-                        <a href="http://127.0.0.1:8000/articles/login">Login</a>
+                        <a href="http://localhost:8000/articles/login">Login</a>
                     </li>
                     {% endif %}
                 </ul>
@@ -182,7 +182,7 @@
 			  </p> 
 	    
 
-	    <form action="http://127.0.0.1:8000/user_action/{{ article.id }}/" method="post" accept-charset="utf-8" class="col-lg-offset-2">
+	    <form action="http://localhost:8000/user_action/{{ article.id }}/" method="post" accept-charset="utf-8" class="col-lg-offset-2">
 	     <table class="table">
 	     		<tr>
 	     			<td><input type="text" style="display:none;" class="form-control" name="parentcomment" value="{{comment.id}}"/>
@@ -197,7 +197,7 @@
 	{% endif %}
 
 
-	<form action="http://127.0.0.1:8000/user_action/{{ article.id }}/" method="post" accept-charset="utf-8"> 
+	<form action="http://localhost:8000/user_action/{{ article.id }}/" method="post" accept-charset="utf-8"> 
 		<table class="table">
 		{% csrf_token %}
 				<tr>

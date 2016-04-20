@@ -101,9 +101,9 @@
 <div id="header_menu">
 <h4>EOS Article:</h4>
 <ul>
-    <li><a rel="nofollow" target="_self" href="http://127.0.0.1:8000/user_action/home">Home</a></li>
-    <li><a rel="nofollow" target="_self" href="http://127.0.0.1:8000/articles/register">Registeration</a></li>
-    <li><a rel="nofollow" target="_self" href="http://127.0.0.1:8000/articles/login">Login</a>
+    <li><a rel="nofollow" target="_self" href="http://localhost:8000/user_action/home">Home</a></li>
+    <li><a rel="nofollow" target="_self" href="http://localhost:8000/articles/register">Registeration</a></li>
+    <li><a rel="nofollow" target="_self" href="http://localhost:8000/articles/login">Login</a>
     <!-- <li><a rel="nofollow" target="_self" href="#">Logout</a> -->
     <!-- </li> -->
 </ul>
@@ -149,7 +149,7 @@
                 </div>
                 <div id="login-sub">
                     <div id="forms">
-                                <form id="login_form" action="http://127.0.0.1:8000/articles/signin/" method="post" target="_top">
+                                <form id="login_form" action="http://localhost:8000/articles/signin/" method="post" target="_top">
                                     {% csrf_token %}
                                     <div class="input-req-login">
                                         <label for="user">User Name:</label>
@@ -179,7 +179,6 @@
                                                <a id="face" href="/accounts/facebook/login/?process=login">Login Wz FaceBook</a>
 
                                                 <button  id="log" name="login" type="submit" id="login_submit" tabindex="3">Log in</button>
-
                                             </div>
                                     </div>
                                     <div class="clear" id="push"></div>

@@ -34,7 +34,7 @@ def system_locked(request):
 def home(request):
     lock = lockSystem.objects.get(pk=1)
     if lock.is_locked == True:
-        return redirect("http://127.0.0.1:8000/user_action/system_locked") 
+        return redirect("http://localhost:8000/user_action/system_locked") 
     else:
         top_article_list = Article.objects.order_by('-art_number_views')[:3]
         images = []
@@ -46,7 +46,6 @@ def home(request):
             'images':images
         }
         return render(request, 'user_action/home.html', context)
-
 
 def index(request):
     user  = User.objects.get(pk=request.session['user_id'])
@@ -63,7 +62,7 @@ def index(request):
         }
         return render(request, 'user_action/index.html', context)
     else:
-        return redirect('http://127.0.0.1:8000/user_action/home')
+        return redirect('http://localhost:8000/user_action/home')
 
 
 def design(request):
@@ -159,7 +158,7 @@ def details(request, article_id):
             context = {"article":article,"comments":comments,"form":form1,"artimage":artimage,"related_articles":related_articles,"user":user}
             return render(request,'user_action/details.html',context)
         else:
-            return redirect("http://127.0.0.1:8000/user_action/")
+            return redirect("http://localhost:8000/user_action/")
     except Article.DoesNotExist:
         raise Http404("Question does not exist")
     return render(request, 'user_action/details.html', context)
@@ -192,7 +191,7 @@ def success(request):
                 article.art_img =form.cleaned_data['image']
                 article.save()
             # return render(request,'user_action/success.html')
-            return redirect('http://127.0.0.1:8000/user_action/')
+            return redirect('http://localhost:8000/user_action/')
         else:
             form = PostForm(request.POST, request.FILES)
             if form.is_valid():
@@ -203,7 +202,7 @@ def success(request):
                 article.art_user_id_id = request.session['user_id']
                 article.save()
             # return render(request,'user_action/success.html')
-            return redirect('http://127.0.0.1:8000/user_action/')
+            return redirect('http://localhost:8000/user_action/')
 
     if request.GET.get('action'):
         if request.GET.get('id'):
@@ -211,4 +210,4 @@ def success(request):
             article = Article.objects.get(pk=article_id)
             article.delete()
         # return render(request,'user_action/success.html')
-        return redirect('http://127.0.0.1:8000/user_action/')
+        return redirect('http://localhost:8000/user_action/')

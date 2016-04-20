@@ -21,7 +21,7 @@ def randomConfirm(length=3):
 def register(request):
     lock = lockSystem.objects.get(pk=1)
     if lock.is_locked == True:
-        return redirect("http://127.0.0.1:8000/user_action/system_locked") 
+        return redirect("http://localhost:8000/user_action/system_locked") 
     else:
         return render(request,'articles/register.html')
 
@@ -75,15 +75,15 @@ def email_register(request):
             {'user_form': user_form, 'profile_form': profile_form, 'registered': registered})
 
 def face_register(request):
-
-    return render(request,'articles/face_register.html')
+    request.session["user_id"] = 12
+    return redirect('http://localhost:8000/user_action/')
 
 # ******************************** login ************************************        
 def signin(request):
     context = RequestContext(request)
     if "user_id" in request.session:
          # return render(request, 'articles/home.html',{'user_id':request.session["user_id"]})
-         return redirect('http://127.0.0.1:8000/user_action/')
+         return redirect('http://localhost:8000/user_action/')
     else:
     # If the request is a HTTP POST, try to pull out the relevant information.
         if request.method == 'POST':
@@ -100,7 +100,7 @@ def signin(request):
                         request.session.set_test_cookie()
                         if request.session.test_cookie_worked():
                             request.COOKIES['rememberMe'] = request.POST['remember_me']
-                    return redirect('http://127.0.0.1:8000/user_action/')
+                    return redirect('http://localhost:8000/user_action/')
                     
                 else:
                     # An inactive account was used - no logging in!
@@ -192,7 +192,7 @@ def reset(request):
             u.password=reset
             u.save()
             request.session["user_id"]=u.id
-            return redirect('http://127.0.0.1:8000/user_action/')
+            return redirect('http://localhost:8000/user_action/')
     
     return render(request,'articles/resetpassword.html',{"form" : form})
 
@@ -235,7 +235,7 @@ def login(request):
     # return HttpResponse("Hello, world. You're at the article index.")
     lock = lockSystem.objects.get(pk=1)
     if lock.is_locked == True:
-        return redirect("http://127.0.0.1:8000/user_action/system_locked") 
+        return redirect("http://localhost:8000/user_action/system_locked") 
     else:
         return render(request,'articles/login.html')
 
